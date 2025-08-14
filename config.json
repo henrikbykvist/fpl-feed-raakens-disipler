@@ -1,0 +1,23 @@
+{
+  "manager_id": 5477177,
+  "league_ids": [
+    245875,
+    1094244,
+    1103755,
+    1207802
+  ],
+  "base_url": "https://fantasy.premierleague.com/api",
+  "endpoints": {
+    "bootstrap_static": "/bootstrap-static/",
+    "fixtures": "/fixtures/",
+    "entry": "/entry/{manager_id}/",
+    "league": "/leagues-classic/{league_id}/standings/"
+  },
+  "odds": {
+    "enabled": true,
+    "provider": "THE_ODDS_API",
+    "sport_key": "soccer_epl",
+    "regions": "eu",
+    "markets": "h2h,totals"
+  }
+}
