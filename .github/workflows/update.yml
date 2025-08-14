@@ -22,7 +22,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           persist-credentials: true
-          fetch-depth: 0  # needed for pushes
+          fetch-depth: 0
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -42,25 +42,9 @@ jobs:
         run: |
           python fetch_fpl.py
 
-      - name: Commit & push if changed
-        run: |
-          # Make repo safe for Git in Actions
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          # Ensure data folder exists (should already)
-          mkdir -p data
-
-          # Stage only the files we generate
-          git add -A data/latest.json data/latest.pretty.json || true
-
-          # If nothing staged, exit gracefully
-          if git diff --cached --quiet; then
-            echo "No changes to commit"; exit 0
-          fi
-
-          # Rebase in case branch moved, then push
-          git pull --rebase
-          git commit -m "Update FPL feed"
-          git push
+      # Robust commit/push step
+      - name: Commit and push data/*.json
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Update FPL feed"
+          file_pattern: data/*.json
