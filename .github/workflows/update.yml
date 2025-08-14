@@ -1,36 +1,66 @@
-name: Update FPL Feed
+name: Update FPL Feed (hourly)
 
 on:
   schedule:
-    - cron: '0 * * * *' # Kjører hver hele time
-  workflow_dispatch: # Lar deg kjøre manuelt fra Actions-fanen
+    - cron: "0 * * * *"   # every hour (UTC)
+  workflow_dispatch: {}
+  push:
+    paths:
+      - "config.json"
+      - "fetch_fpl.py"
+      - "extras/**"
+      - ".github/workflows/update.yml"
+
+permissions:
+  contents: write  # allow commits/pushes
 
 jobs:
-  update-feed:
+  update:
     runs-on: ubuntu-latest
     steps:
-    - name: Sjekk ut repo
-      uses: actions/checkout@v3
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          fetch-depth: 0  # needed for pushes
 
-    - name: Sett opp Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
 
-    - name: Installer avhengigheter
-      run: |
-        pip install requests pandas
+      - name: Run fetch script
+        env:
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+          ODDS_API_BASE: ${{ vars.ODDS_API_BASE }}
+          ODDS_SPORT_KEY: ${{ vars.ODDS_SPORT_KEY }}
+          ODDS_REGIONS: ${{ vars.ODDS_REGIONS }}
+          ODDS_MARKETS: ${{ vars.ODDS_MARKETS }}
+          SETPIECES_URL: ${{ vars.SETPIECES_URL }}
+          INJURIES_URL: ${{ vars.INJURIES_URL }}
+          ELITE_FEEDS_URL: ${{ vars.ELITE_FEEDS_URL }}
+        run: |
+          python fetch_fpl.py
 
-    - name: Kjør FPL fetch
-      run: |
-        python fetch_fpl.py
-        python process_odds.py
-        python validate_feed.py
+      - name: Commit & push if changed
+        run: |
+          # Make repo safe for Git in Actions
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-    - name: Commit og push oppdateringer
-      run: |
-        git config --local user.email "actions@github.com"
-        git config --local user.name "GitHub Actions"
-        git add .
-        git commit -m "Oppdatert FPL feed automatisk" || echo "Ingen endringer"
-        git push
+          # Ensure data folder exists (should already)
+          mkdir -p data
+
+          # Stage only the files we generate
+          git add -A data/latest.json data/latest.pretty.json || true
+
+          # If nothing staged, exit gracefully
+          if git diff --cached --quiet; then
+            echo "No changes to commit"; exit 0
+          fi
+
+          # Rebase in case branch moved, then push
+          git pull --rebase
+          git commit -m "Update FPL feed"
+          git push
