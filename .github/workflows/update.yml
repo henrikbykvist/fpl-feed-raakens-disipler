@@ -1,0 +1,36 @@
+name: Update FPL Feed
+
+on:
+  schedule:
+    - cron: '0 * * * *' # Kjører hver hele time
+  workflow_dispatch: # Lar deg kjøre manuelt fra Actions-fanen
+
+jobs:
+  update-feed:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Sjekk ut repo
+      uses: actions/checkout@v3
+
+    - name: Sett opp Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Installer avhengigheter
+      run: |
+        pip install requests pandas
+
+    - name: Kjør FPL fetch
+      run: |
+        python fetch_fpl.py
+        python process_odds.py
+        python validate_feed.py
+
+    - name: Commit og push oppdateringer
+      run: |
+        git config --local user.email "actions@github.com"
+        git config --local user.name "GitHub Actions"
+        git add .
+        git commit -m "Oppdatert FPL feed automatisk" || echo "Ingen endringer"
+        git push
