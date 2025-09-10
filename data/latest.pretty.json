@@ -2295,7 +2295,7 @@
           "pulse_id": 38
         }
       ],
-      "total_players": 11643668,
+      "total_players": 11643820,
       "element_stats": [
         {
           "label": "Minutes played",
@@ -98084,6 +98084,6 @@
     "enabled": false,
     "reason": "missing_api_key_or_disabled"
   },
-  "_fetched_at_utc": "2025-09-10T18:46:49.265699Z",
+  "_fetched_at_utc": "2025-09-10T19:22:46.520485Z",
   "_note": "Public FPL feed for Raakens Disipler (Henrik). Some sections may be fallbacks with low confidence."
 }
