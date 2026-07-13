@@ -2302,7 +2302,7 @@
         "settings": {
           "entry_per_event": false,
           "timezone": "UTC",
-          "static_content_url": "https://fantasy.premierleague.com/gcs/plfpl-prod-static-content/plfpl-production/"
+          "static_content_url": "https://fantasy.premierleague.com/gcs/plfpl-prod-static-content/plfpl-production/2025_26/"
         },
         "rules": {
           "league_join_private_max": 30,
@@ -233747,6 +233747,6 @@
     "enabled": false,
     "reason": "missing_api_key_or_disabled"
   },
-  "_fetched_at_utc": "2026-07-13T08:47:57.289210Z",
+  "_fetched_at_utc": "2026-07-13T11:51:31.095368Z",
   "_note": "Public FPL feed for Raakens Disipler (Henrik). Some sections may be fallbacks with low confidence."
 }
