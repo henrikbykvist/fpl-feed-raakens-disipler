@@ -1617,8 +1617,8 @@
             "points": 17
           },
           "transfers_made": 8668376,
-          "most_captained": null,
-          "most_vice_captained": null
+          "most_captained": 430,
+          "most_vice_captained": 430
         },
         {
           "id": 28,
@@ -9822,7 +9822,7 @@
         {
           "can_transact": true,
           "can_select": false,
-          "chance_of_playing_next_round": 100,
+          "chance_of_playing_next_round": 0,
           "chance_of_playing_this_round": 100,
           "code": 449871,
           "cost_change_event": 0,
@@ -9839,8 +9839,8 @@
           "form": "0.0",
           "id": 59,
           "in_dreamteam": false,
-          "news": "",
-          "news_added": "2026-04-26T22:30:07.719459Z",
+          "news": "Knee injury - Expected back 01 Apr",
+          "news_added": "2026-07-21T17:00:09.191575Z",
           "now_cost": 48,
           "photo": "449871.jpg",
           "points_per_game": "3.0",
@@ -9849,7 +9849,7 @@
           "selected_by_percent": "0.6",
           "special": false,
           "squad_number": null,
-          "status": "a",
+          "status": "i",
           "team": 2,
           "team_code": 7,
           "total_points": 76,
@@ -63108,7 +63108,7 @@
         {
           "can_transact": true,
           "can_select": false,
-          "chance_of_playing_next_round": 100,
+          "chance_of_playing_next_round": 0,
           "chance_of_playing_this_round": 100,
           "code": 232112,
           "cost_change_event": 0,
@@ -63125,8 +63125,8 @@
           "form": "0.0",
           "id": 459,
           "in_dreamteam": false,
-          "news": "",
-          "news_added": "2026-05-09T21:30:09.638441Z",
+          "news": "Knee injury - Unknown return date",
+          "news_added": "2026-07-21T17:00:09.271692Z",
           "now_cost": 47,
           "photo": "232112.jpg",
           "points_per_game": "1.7",
@@ -63135,7 +63135,7 @@
           "selected_by_percent": "0.1",
           "special": false,
           "squad_number": null,
-          "status": "a",
+          "status": "i",
           "team": 14,
           "team_code": 1,
           "total_points": 38,
@@ -63185,7 +63185,7 @@
           "penalties_order": null,
           "penalties_text": "",
           "scout_risks": [],
-          "scout_news_link": "",
+          "scout_news_link": "https://www.manutd.com/en/news/an-official-update-on-manuel-ugarte?utm_source=premier_league&utm_medium=referral&utm_campaign=fantasy&utm_content=injuries-flag",
           "influence_rank": 332,
           "influence_rank_type": 147,
           "creativity_rank": 317,
@@ -233747,6 +233747,6 @@
     "enabled": false,
     "reason": "missing_api_key_or_disabled"
   },
-  "_fetched_at_utc": "2026-07-21T16:15:56.957337Z",
+  "_fetched_at_utc": "2026-07-21T18:09:50.454634Z",
   "_note": "Public FPL feed for Raakens Disipler (Henrik). Some sections may be fallbacks with low confidence."
 }
